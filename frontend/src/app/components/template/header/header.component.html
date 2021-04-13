@@ -1,0 +1,26 @@
+<app-card>
+<div class="header">
+  <p-sidebar [(visible)]="display" [style]="{width:'20em'}" position="left">
+    <p-tieredMenu [model]="items"></p-tieredMenu>
+</p-sidebar>
+<button pButton type="text" (click)="display = true" icon="pi pi-bars"></button>
+<span>
+  
+    <a routerLink="/">
+        <img class="logo" src="assets/img/logo.png" alt="logo">
+    </a>
+
+</span>
+
+
+</div>
+
+</app-card>
+
+
+  <router-outlet>
+  </router-outlet>
+
+
+
+

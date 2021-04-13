@@ -1,0 +1,34 @@
+.header{
+    display: flex;
+    align-items: center;
+
+
+}
+
+.header a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+}
+
+.header .logo{
+  max-height: 40px;
+  margin-left: 25px;
+}
+
+.header .title-group{
+  padding-left: 250px;
+}
+.header .title-group i{
+  padding-left: 7px;
+}
+.p-card .p-card-body {
+  padding: 1rem;
+  margin-bottom: 20px;
+}
+
+.p-tieredmenu{
+  border: none;
+}
+

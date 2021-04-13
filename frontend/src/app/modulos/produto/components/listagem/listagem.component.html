@@ -1,0 +1,60 @@
+
+<app-card>
+
+    
+<div class="card">
+    <p-table [value]="produtos"   dataKey="code">
+        <ng-template pTemplate="header">
+            <tr>
+               
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th class="acoes">Ações</th>
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-produto>
+            <tr>
+            
+                <td>{{produto.nome}}</td>
+                <td>{{produto.descricao}}</td>
+                <td>{{produto.preco | currency: 'USD'}}</td>
+                <td>
+                    <i (click)="mostrarDialogEditar(produto.id)" class="edit">
+                        <i class="pi pi-pencil">
+                        
+                        </i>        
+                    </i>
+                  
+                    <i  class="visualizar">
+                        <i class="pi pi-eye">
+                           
+                        </i>
+                        
+                    </i>
+                    <i  class="delete">
+                        <i (click)="deletarProduto(produto.id)" class="pi pi-trash">
+                           
+                        </i>
+                        
+                    </i>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table> 
+</div>
+</app-card>
+
+ 
+ <button pButton class="p-button-outlined" routerLink="/formulario" label="Novo Produto" icon="pi pi-plus-circle" iconPos="left"></button>
+
+
+
+<p-dialog [(visible)]="display" [style]="{width: '55vw', heith: '80vw'}" >
+   <app-formulario
+       [produtos]="produto"
+       [edicao]="formularioEdicao"
+       (produtoSalvo)="fecharDialog($event)"
+   ></app-formulario>
+</p-dialog>

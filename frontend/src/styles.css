@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+.p-card{
+  margin-bottom: 15px;
+
+}
+
+
+.p-button.p-button-icon-only {
+  background: white;
+  width: 55px;
+  color: black;
+  border: 1px solid #FFF;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin-left: 5px;
+  
+}
+
+
+
+.p-button{
+  background: white;
+  margin-left: 20px;
+  color: tomato;
+  border-radius: 13px;
+  border: 1px solid lightcyan
+
+  
+}
+.p-button:enabled:hover{
+  background: none;
+  color: #2196F3;
+}
+.p-button.p-button-outlined{
+  color: tomato;
+}

@@ -1,0 +1,50 @@
+<app-card class="card">
+ 
+  <button pButton routerLink="/listagem" type="button" icon="pi pi-chevron-left" class="p-button-outlined" *ngIf="!edicao"></button>
+
+<form [formGroup]="formProduto" class="formulario">
+<div class="ui-g">
+  <div class="titulo" *ngIf="!edicao">
+    Cadastro de Produto
+  </div>
+  <div class="titulo" *ngIf="edicao">
+    Alterar Produto
+  </div>
+<div class="p-fluid p-grid">
+  <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text"  pInputText [(ngModel)]="produtos.nome" name="nome" formControlName="nome">
+          
+          <label for="inputnumber">Nome do Produto</label>
+      </span>
+  </div>
+</div>
+
+<div class="p-fluid p-grid">
+  <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <p-inputNumber [(ngModel)]="produtos.preco" name="preco" mode="currency" currency="BRL" locale="pt-BR" formControlName="preco"></p-inputNumber>
+          <label for="inputnumber">Preço do Produto</label> 
+      </span>
+  </div>
+
+</div>
+<div class="p-fluid p-grid">
+  <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+       
+          <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" [(ngModel)]="produtos.descricao" name="descricao" formControlName="descricao"></textarea>
+
+          <label for="inputtext">Descrição do Produto</label>
+      
+
+      </span>
+  </div>
+
+</div>
+
+</div>
+</form>
+
+</app-card>
+<button pButton (click)="salvarProduto()" [disabled]="formProduto.invalid" type="button" [label]="edicao ? 'Salvar' : 'Cadastrar'" ></button>
