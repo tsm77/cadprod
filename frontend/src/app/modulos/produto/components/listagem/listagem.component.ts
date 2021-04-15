@@ -17,6 +17,7 @@ export class ListagemComponent implements OnInit {
   produtos: Produtos[] = [];
   produto = new Produtos();
   display = false;
+  exibir = false;
   formularioEdicao: boolean;
  
   constructor(private produtoService: ProdutosService,
@@ -44,7 +45,16 @@ export class ListagemComponent implements OnInit {
     
     )
     
+  }mostarDialogDetails(id: number){
+    this.produtoService.obterPorId(id)
+    .subscribe(produto =>{
+      this.produto = produto;
+      this.exibir = true;
+
+    })
   }
+
+
   mostrarDialogEditar(id: number){
     this.produtoService.obterPorId(id)
     .subscribe(produto =>{
@@ -52,7 +62,7 @@ export class ListagemComponent implements OnInit {
       this.mostrarDialog(true);
     });
   }
- 
+
 
   mostrarDialog(edicao = false) {
     this.display = true;

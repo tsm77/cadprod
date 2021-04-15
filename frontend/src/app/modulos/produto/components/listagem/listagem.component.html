@@ -19,7 +19,7 @@
             
                 <td>{{produto.nome}}</td>
                 <td>{{produto.descricao}}</td>
-                <td>{{produto.preco | currency: 'USD'}}</td>
+                <td>{{produto.preco | currency: 'BRL'}}</td>
                 <td>
                     <i (click)="mostrarDialogEditar(produto.id)" class="edit">
                         <i class="pi pi-pencil">
@@ -28,7 +28,7 @@
                     </i>
                   
                     <i  class="visualizar">
-                        <i class="pi pi-eye">
+                        <i (click)="mostarDialogDetails(produto.id)" class="pi pi-eye">
                            
                         </i>
                         
@@ -52,9 +52,22 @@
 
 
 <p-dialog [(visible)]="display" [style]="{width: '55vw', heith: '80vw'}" >
-   <app-formulario
+   <app-formulario 
        [produtos]="produto"
        [edicao]="formularioEdicao"
        (produtoSalvo)="fecharDialog($event)"
    ></app-formulario>
+</p-dialog>
+<p-dialog [(visible)]="exibir"  [style]="{width: '55vw', heith: '80vw'}">
+   <p-card>
+       <div class="container">
+        <div class="id">ID: {{produto.id}}</div>
+        <div class="nome">Nome: {{produto.nome}}</div>
+        <div class="preco">Preço: {{produto.preco  | currency: 'BRL'}}</div>
+        <div class="descricao">Descrição: {{produto.descricao}}</div>
+
+       </div>
+       
+   </p-card>
+
 </p-dialog>

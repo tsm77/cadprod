@@ -29,4 +29,22 @@ width: 120px;
 .delete :hover{
  color: blue;
 }
-
+.container{
+   font-weight: bold;
+   font-size: 20px;
+   color: tomato;
+   text-align: center;
+}
+.id{
+    margin-bottom: 10px;
+    
+}
+.nome{
+    margin-bottom: 10px;
+}
+.preco{
+    margin-bottom: 10px;
+}
+.descricao{
+    margin-bottom: 10px;
+}
