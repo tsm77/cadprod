@@ -18,6 +18,9 @@
             <column name="descricao" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="quantidade" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <addPrimaryKey tableName="produto" columnNames="id" constraintName="pk_produto"/>
         <createSequence sequenceName="sq_produto"  incrementBy="1" startValue="1"/>

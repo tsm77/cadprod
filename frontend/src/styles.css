@@ -4,7 +4,6 @@
 
 }
 
-
 .p-button.p-button-icon-only {
   background: white;
   width: 55px;
@@ -17,21 +16,47 @@
   
 }
 
-
-
+.pi {
+  font-size: 1rem;
+  margin-right: 5px;
+}
 .p-button{
   background: white;
   margin-left: 20px;
-  color: tomato;
-  border-radius: 13px;
+  color: darkblue;
+  height: 3rem;
   border: 1px solid lightcyan
 
-  
+
 }
-.p-button:enabled:hover{
+.alinhamento {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.button-success {
+  background-color: #17882c !important;
+  border: 2px solid #17882c !important;
+  width: 30% !important;
+}
+.p-grid {
+  margin-top: 25px;
+  justify-content: center;
+}
+
+.button-danger {
+  background-color: #e60000 !important;
+  border: 2px solid #e60000 !important;
+  float: left;
+  width: 30% !important;
+}
+
+.p-fieldset .p-fieldset-legend {
+  border: none;
   background: none;
-  color: #2196F3;
 }
-.p-button.p-button-outlined{
-  color: tomato;
+
+
+input{
+  margin: 1opx;
 }

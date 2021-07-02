@@ -1,78 +1,97 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { Produtos } from 'src/app/dominios/produtos';
-import { ProdutosService } from '../../service/produtos.service';
-
+import { Produto } from 'src/app/dominios/produto';
+import { ProdutosService } from '../../service/produto.service';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { finalize } from 'rxjs/operators';
+import { MensagensUtil } from 'src/app/shared/util/mensagens.util';
+import { FormularioComponent } from 'src/app/modulos/produto/components/formulario/formulario.component';
+import { AlertaService } from 'src/app/shared/util/alerta.service';
+import { ModalService } from 'src/app/shared/util/modal.serivce';
 @Component({
   providers: [ConfirmationService],
   selector: 'app-listagem',
   templateUrl: './listagem.component.html',
   styleUrls: ['./listagem.component.css']
-  
+
 })
 export class ListagemComponent implements OnInit {
-
-  @Output() produtoSalvo = new EventEmitter<Produtos>();
-  produtos: Produtos[] = [];
-  produto = new Produtos();
+  @BlockUI() blockUI: NgBlockUI;
+  @Output() produtoSalvo = new EventEmitter<Produto>();
+  produtos: Produto[] = [];
+  produto = new Produto();
   display = false;
   exibir = false;
   formularioEdicao: boolean;
- 
+
   constructor(private produtoService: ProdutosService,
-      private router: Router) { }
+    private router: Router,
+    private modalService: ModalService,
+    private confirmationService: ConfirmationService,
+    private alertaService: AlertaService,) { }
 
   ngOnInit(): void {
-    this.buscarProdutos()
-    
-  }
-  buscarProdutos(){
-    this.produtoService.getProduto().subscribe(produtos => {
-      this.produtos = produtos;
-     
-    })
+    this.search()
+
   }
 
-
-   
-  deletarProduto(id: number){
-    this.produtoService.deletar(id).subscribe(() =>{
-      alert("Produto deletado!")
-      this.router.navigate(['/listagem'])
-      this.buscarProdutos();
-    },
-    
-    )
-    
-  }mostarDialogDetails(id: number){
-    this.produtoService.obterPorId(id)
-    .subscribe(produto =>{
-      this.produto = produto;
-      this.exibir = true;
-
-    })
+  dimensoes = {
+    altura: 'auto',
+    largura: '50%'
+};
+  search() {
+    this.blockUI.start(MensagensUtil.BLOCKUI_CARREGANDO);
+    console.log(this.blockUI.start())
+    this.produtoService.getProduto()
+      .pipe(finalize(() => this.blockUI.stop()))
+      .subscribe(response => { this.produtos = response
+       },);
+       
   }
 
-
-  mostrarDialogEditar(id: number){
-    this.produtoService.obterPorId(id)
-    .subscribe(produto =>{
-      this.produto = produto;
-      this.mostrarDialog(true);
+  excluir(id: number) {
+    this.confirmationService.confirm({
+      message: MensagensUtil.CONFIRMAR_EXCLUSAO_REFERENCIA,
+      header: 'Excluir Produto',
+      icon: 'pi pi-times',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não', 
+      accept: () => {
+        this.blockUI.start(MensagensUtil.BLOCKUI_EXCLUINDO);
+        this.produtoService.deletar(id)
+          .pipe(finalize(() => this.blockUI.stop())).subscribe(() => {
+            this.alertaService.sucesso(MensagensUtil.SUCESSO);
+            this.search();
+          });
+      }
     });
   }
 
 
-  mostrarDialog(edicao = false) {
-    this.display = true;
-    this.formularioEdicao = edicao;
- 
-}
-fecharDialog(produtoSalvo: Produtos){
-  this.display = false;
-  this.buscarProdutos();
-}
+  mostarDialogDetails(id: number) {
+    this.produtoService.obterPorId(id)
+      .subscribe(produto => {
+        this.produto = produto;
+        this.exibir = true;
+
+      })
+  }
+
+  abrirModalAlterar(id: number) {
+    const modal = this.modalService.modalComponente(FormularioComponent, this.dimensoes, id);
+    modal.onClose.subscribe(() => {
+      this.search();
+    });
+  }
+
+
+  abrirModalIncluir() {
+    const modal = this.modalService.modalComponente(FormularioComponent);
+    modal.onClose.subscribe(() => {
+      this.search();
+    });
+  }
 
 
 }

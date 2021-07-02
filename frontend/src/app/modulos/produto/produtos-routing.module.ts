@@ -1,4 +1,4 @@
-import { FormularioComponent } from './../../shared/components/formulario/formulario.component';
+import { FormularioComponent } from './components/formulario/formulario.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

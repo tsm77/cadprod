@@ -6,8 +6,6 @@ import com.digitailinnovationone.springboot.servico.Exception.RegraNegocioExcept
 import com.digitailinnovationone.springboot.servico.dto.ProdutoDTO;
 import com.digitailinnovationone.springboot.servico.mapper.ProdutoMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -48,8 +46,7 @@ public class ProdutoServico {
     }
 
     public void remover(Integer id){
-        Produto produto = produtoRepositorio.findById(id).orElseThrow(()
-                -> new RegraNegocioException("Produto nao encontrado"));
+      produtoRepositorio.findById(id).orElseThrow(()-> new RegraNegocioException("Produto nao encontrado"));
         produtoRepositorio.deleteById(id);
     }
 

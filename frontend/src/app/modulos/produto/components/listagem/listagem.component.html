@@ -10,6 +10,7 @@
                 <th>Nome</th>
                 <th>Descrição</th>
                 <th>Preço</th>
+                <th>Quantidade</th>
                 <th class="acoes">Ações</th>
               
             </tr>
@@ -20,8 +21,9 @@
                 <td>{{produto.nome}}</td>
                 <td>{{produto.descricao}}</td>
                 <td>{{produto.preco | currency: 'BRL'}}</td>
+                 <td>{{produto.quantidade}}</td>
                 <td>
-                    <i (click)="mostrarDialogEditar(produto.id)" class="edit">
+                    <i (click)="abrirModalAlterar(produto.id)" class="edit">
                         <i class="pi pi-pencil">
                         
                         </i>        
@@ -34,7 +36,7 @@
                         
                     </i>
                     <i  class="delete">
-                        <i (click)="deletarProduto(produto.id)" class="pi pi-trash">
+                        <i (click)="excluir(produto.id)" class="pi pi-trash">
                            
                         </i>
                         
@@ -44,20 +46,13 @@
         </ng-template>
     </p-table> 
 </div>
+<p-confirmDialog></p-confirmDialog>
 </app-card>
 
  
- <button pButton class="p-button-outlined" routerLink="/formulario" label="Novo Produto" icon="pi pi-plus-circle" iconPos="left"></button>
+ <button pButton class="btn-novo" (click)="abrirModalIncluir()" label="Novo" icon="pi pi-plus-circle" iconPos="left"></button>
 
 
-
-<p-dialog [(visible)]="display" [style]="{width: '55vw', heith: '80vw'}" >
-   <app-formulario 
-       [produtos]="produto"
-       [edicao]="formularioEdicao"
-       (produtoSalvo)="fecharDialog($event)"
-   ></app-formulario>
-</p-dialog>
 <p-dialog [(visible)]="exibir"  [style]="{width: '55vw', heith: '80vw'}">
    <p-card>
        <div class="container">
@@ -69,5 +64,4 @@
        </div>
        
    </p-card>
-
 </p-dialog>

@@ -1,6 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FormularioComponent } from './shared/components/formulario/formulario.component';
+import { FormularioComponent } from './modulos/produto/components/formulario/formulario.component';
 import { ProdutosModule } from './modulos/produto/produtos.module';
 import { ListagemComponent } from './modulos/produto/components/listagem/listagem.component';
 import { HomeComponent } from './modulos/produto/components/home/home.component';
